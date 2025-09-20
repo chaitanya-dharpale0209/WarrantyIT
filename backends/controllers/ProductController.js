@@ -18,7 +18,7 @@ const createProductWithUser = async (req, res) => {
   
   try {
     // Check if user exists or create new user
-    let user = await userModel.findUserByEmail(email); // FIXED: Added ByEmail
+    let user = await userModel.findUserByEmail(email); 
     
     if (!user) {
       user = await userModel.createUser(name, email);
@@ -50,7 +50,6 @@ const createProductWithUser = async (req, res) => {
   }
 };
 
-// Rest of the code remains the same...
 // Get all products for a user
 const getUserProducts = async (req, res) => {
   const { userId } = req.params;
