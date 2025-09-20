@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { CheckCircle, User, Package, AlertCircle, Loader2, X, Calendar, DollarSign } from 'lucide-react';
 
-// Enhanced FormInput Component
 const FormInput = ({
   label,
   type = 'text',

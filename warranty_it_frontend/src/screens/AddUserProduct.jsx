@@ -5,7 +5,7 @@ import { productApi } from '../api/productApi';
 import FormInput from '../components/FormInputs';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SuccessMessage from '../components/SuccessMessage';
-import { Calendar, CheckCircle, DollarSign, Package, User } from 'lucide-react';
+import { AlertCircle, Calendar, CheckCircle, DollarSign, Package, User } from 'lucide-react';
 
 const AddUserProduct = () => {
   const [loading, setLoading] = useState(false);
