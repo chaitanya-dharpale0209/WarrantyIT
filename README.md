@@ -38,20 +38,18 @@ WarrantyIT is a comprehensive product warranty management system designed to hel
 ## ✨ Features
 
 ### User Management
-- User registration and retrieval
-- Email-based user identification
-- Automatic user creation if not exists
+- User get created along with the product creation.
 
 ### Product Management
-- Add new products with warranty information
+- Add new products with warranty information.
 - View all products for a specific user
-- Update existing product details
-- Delete products
-- Comprehensive product information tracking
+- Update existing product details API
+- Delete products API
+
 
 ### Data Validation
-- Frontend form validation with real-time feedback
-- Backend input validation and sanitization
+- Frontend form validation.
+- Backend input validation and sanitization.
 - Email format validation
 - Required field validation
 
@@ -157,8 +155,8 @@ POST /api/users
 **Request Body:**
 ```json
 {
-  "name": "John Doe",
-  "email": "john@example.com"
+  "name": "Demo User",
+  "email": "demouser@example.com"
 }
 ```
 
@@ -176,8 +174,8 @@ POST /api/products
 **Request Body:**
 ```json
 {
-  "name": "John Doe",
-  "email": "john@example.com",
+  "name": "Demo User",
+  "email": "demouser@example.com",
   "product_name": "MacBook Pro",
   "brand": "Apple",
   "type": "Electronics",
@@ -380,8 +378,8 @@ No environment variables required for the frontend. The API base URL is configur
 **Creating a product with user:**
 ```javascript
 const productData = {
-  name: "John Doe",
-  email: "john@example.com",
+  name: "Demo User",
+  email: "demouser@example.com",
   product_name: "iPhone 15",
   brand: "Apple",
   type: "Electronics",
@@ -448,7 +446,7 @@ The backend is deployed on Render.com with automatic deployments from the `back_
 The frontend is deployed on Vercel with automatic deployments from the `front_end` branch.
 
 ### Database
-PostgreSQL database is hosted on a cloud provider with SSL connection.
+PostgreSQL database is hosted on render cloud service.
 
 ## 📈 Performance Optimizations
 
@@ -469,8 +467,8 @@ PostgreSQL database is hosted on a cloud provider with SSL connection.
 ## 📧 Contact
 
 For any questions or support, please contact:
-- Email: support@warrantyit.com
-- GitHub Issues: [Create an issue](https://github.com/yourusername/warrantyit/issues)
+- Email: chaitanydharpale@gmail.com
+
 
 ## 📄 License
 
