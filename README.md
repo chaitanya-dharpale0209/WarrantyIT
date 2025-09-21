@@ -5,7 +5,7 @@ A full-stack web application that allows users to manage product details and war
 ## 🚀 Live Demo
 
 - **Frontend**: https://warrantyit.vercel.app/
-- **Backend API**: https://warrantyit.onrender.com
+- **Backend API url for testing API**: https://warrantyit.onrender.com
 
 
 ## 📋 Table of Contents
