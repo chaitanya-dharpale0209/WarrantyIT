@@ -135,14 +135,6 @@ Development: http://localhost:3000/api
 
 ### Endpoints
 
-
-**Response:**
-```json
-{
-  "message": "API is running successfully"
-}
-```
-
 #### Users
 
 **Create or Find User**
