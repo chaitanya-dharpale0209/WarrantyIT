@@ -41,8 +41,8 @@ WarrantyIT is a comprehensive product warranty management system designed to hel
 - User get created along with the product creation.
 
 ### Product Management
-- Add new products with warranty information.
-- View all products for a specific user
+- Front end UI to Add new products with warranty information with user name and email on a single page.
+- View all products for a specific user API
 - Update existing product details API
 - Delete products API
 
@@ -135,10 +135,7 @@ Development: http://localhost:3000/api
 
 ### Endpoints
 
-#### Health Check
-```http
-GET /health
-```
+
 **Response:**
 ```json
 {
