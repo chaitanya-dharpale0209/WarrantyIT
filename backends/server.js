@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const userRoutes = require('./routers/UserRoute');
 const productRoutes = require('./routers/ProductRoute');
+const { createIndexes } = require('./migrations/dbinit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,7 +17,7 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+createIndexes().catch(console.error);
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
