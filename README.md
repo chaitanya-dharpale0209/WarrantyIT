@@ -1,4 +1,4 @@
-# WarrantyIT - Product Warranty Management System
+# WarrantyIT - Product Management System
 
 A full-stack web application that allows users to manage product details and warranties efficiently. Built with modern web technologies and production-ready code quality.
 
