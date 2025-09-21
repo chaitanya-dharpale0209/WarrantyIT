@@ -257,7 +257,7 @@ CREATE TABLE products (
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/warrantyit.git
+git clone https://github.com/chaitanya-dharpale0209/WarrantyIT.git
 cd warrantyit
 ```
 
