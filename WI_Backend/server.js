@@ -79,6 +79,7 @@ app.all("*", (req, res) => {
 server.listen(process.env.PORT, () => {
     console.log(`Server listening on port ${process.env.PORT}`);
     console.log(`WebSocket server running on ws://localhost:${process.env.PORT}/api/warranty/ws`);
+    console.log(`postgreSQL connected and running on ${process.env.DATABASE_URL}`)
 });
 
 export { warrantyWebSocket };
