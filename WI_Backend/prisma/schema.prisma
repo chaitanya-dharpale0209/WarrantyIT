@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId      String     @id @default(cuid()) @map("USER_ID")
+  email       String     @unique @map("EMAIL")
+  password    String?    @map("PASSWORD")
+  createdAt   DateTime   @default(now()) @map("CREATED_AT")
+  updatedAt   DateTime?  @updatedAt @map("UPDATED_AT")
+  address     String?    @map("ADDRESS")
+  phoneNumber String?    @map("PHONE_NUMBER")
+  username    String?    @unique @map("USERNAME")
+  name        String     @map("NAME")
+  Warranty    Warranty[]
+
+  Claim Claim[]
+}
+
+model Category {
+  categoryId  String        @id @default(cuid()) @map("CATEGORY_ID")
+  category    String        @unique @map("CATEGORY")
+  SubCategory SubCategory[]
+  Product     Product[]
+  Brand       Brand[]
+}
+
+model SubCategory {
+  subCategoryId String @id @default(cuid()) @map("SUB_CATEGORY_ID")
+  subCategory   String @map("SUB_CATEGORY")
+  categoryId    String @map("CATEGORY_ID")
+
+  category Category  @relation(fields: [categoryId], references: [categoryId])
+  Product  Product[]
+  Brand    Brand[]
+}
+
+model Product {
+  productId       String @id @default(cuid()) @map("PRODUCT_ID")
+  productName     String @map("PRODUCT_NAME")
+  productImageUrl String @map("PRODUCT_IMAGE_URL")
+
+  brandId       String @map("BRAND_ID")
+  categoryId    String @map("CATEGORY_ID")
+  subCategoryId String @map("SUB_CATEGORY_ID")
+
+  brand       Brand       @relation(fields: [brandId], references: [brandId])
+  category    Category    @relation(fields: [categoryId], references: [categoryId])
+  subCategory SubCategory @relation(fields: [subCategoryId], references: [subCategoryId])
+
+  Warranty Warranty[]
+}
+
+model Brand {
+  brandId       String @id @default(cuid()) @map("BRAND_ID")
+  brandName     String @map("BRAND_NAME")
+  categoryId    String @map("CATEGORY_ID")
+  subCategoryId String @map("SUB_CATEGORY_ID")
+
+  category    Category    @relation(fields: [categoryId], references: [categoryId])
+  subCategory SubCategory @relation(fields: [subCategoryId], references: [subCategoryId])
+  Product     Product[]
+}
+/*
+change vendor id from string to gUid
+*/
+model Vendor {
+  vendorId           String     @id @default(cuid()) @map("VENDOR_ID")
+  vendorName         String     @map("VENDOR_NAME")
+  vendorReturnPolicy String     @map("VENDOR_RETURN_POLICY")
+  vendorGstin        String?    @map("VENDOR_GSTIN")
+  vendorAddress      String     @map("VENDOR_ADDRESS")
+  vendorContact      String     @map("VENDOR_CONTACT")
+  Warranty           Warranty[]
+}
+
+
+model Warranty {
+  warrantyId             String   @id @default(cuid()) @map("WARRANTY_ID")
+  warrantyCoverage       String?  @map("WARRANTY_COVERAGE")
+  warrantyType           String?  @map("WARRANTY_TYPE")
+  brandWarranty          String?  @map("BRAND_WARRANTY")
+  warrantyCardImageUrl   String?  @map("WARRANTY_CARD_IMAGE_URL")
+  userId                 String   @map("BUYER_ID")
+  productId              String   @map("PRODUCT_ID")
+  vendorId               String   @map("VENDOR_ID")
+  purchaseDate           String?  @map("PRODUCT_PURCHASE_DATE")
+  serialNumber           String?  @map("PRODUCT_SERIAL_NUMBER")
+  warrantyStart          String?  @map("WARRANTY_START_DATE")
+  warrantyEnd            String?  @map("WARRANTY_END_DATE")
+  warrantyPeriod         String?  @map("WARRANTY_PERIOD")
+  buyersEmail            String?  @map("BUYERS_EMAIL")
+  buyersName             String?  @map("BUYERS_NAME")
+  buyersPhone            String?  @map("BUYERS_PHONE")
+  vendorWarrantyCoverage String?  @map("VENDOR_WARRANTY_COVERAGE")
+  isProductOwned         Boolean? @map("IS_PRODUCT_OWNED")
+  show                   Boolean? @map("SHOW")
+
+  user    User    @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [productId], onDelete: Cascade)
+  vendor  Vendor  @relation(fields: [vendorId], references: [vendorId], onDelete: Cascade)
+  Claim   Claim[]
+}
+
+enum ClaimStatus {
+  SUBMITTED
+  IN_REVIEW
+  TECHNICIAN_ASSIGNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Claim {
+  claimId       String @id @default(cuid()) @map("CLAIM_ID")
+  warrantyId    String @map("WARRANTY_ID")
+  userId        String @map("BUYER_ID")
+  claimIssue    String @map("CLAIM_ISSUE")
+  claimImageUrl String @map("CLAIM_IMAGE_URL")
+  serviceDate   String @map("SERVICE_DATE")
+  serviceTime   String @map("SERVICE_TIME")
+  claimAddress  String @map("CLAIM_ADDRESS")
+
+  currentStatus ClaimStatus @default(SUBMITTED) @map("CURRENT_STATUS")
+
+  user     User     @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  warranty Warranty @relation(fields: [warrantyId], references: [warrantyId], onDelete: Cascade)
+
+  ClaimStatusHistory ClaimStatusHistory[]
+}
+
+model ClaimStatusHistory {
+  historyId String      @id @default(cuid()) @map("HISTORY_ID")
+  claimId   String      @map("CLAIM_ID")
+  status    ClaimStatus @map("STATUS")
+  updatedAt DateTime    @default(now()) @map("UPDATED_AT")
+
+  claim Claim @relation(fields: [claimId], references: [claimId], onDelete: Cascade)
+}
+
+model Log {
+  logId     String   @id @default(cuid()) @map("LOG_ID")
+  userId    String?  @map("USER_ID")
+  location  String   @map("LOCATION")
+  message   String   @map("MESSAGE")
+  stack     String?  @map("STACK")
+  createdAt DateTime @default(now()) @map("CREATED_AT")
+}
